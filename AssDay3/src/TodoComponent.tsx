@@ -62,15 +62,12 @@ const TodoComponent = () => {
   const reducer = (state: List[], action: Actiontype): List[] => {
     switch (action.type) {
       case "Add": {
-        refadd.current?.focus();
-
         return [...state, action.payload];
       }
       case "Remove": {
         return state.filter((item) => item.id !== action.payload);
       }
       case "EditName": {
-        refedit.current?.focus();
         return state.map((item) =>
           item.id === action.payload
             ? { ...item, name: editNameDic[item.id] ?? item.name }
@@ -106,10 +103,14 @@ const TodoComponent = () => {
     );
   }, [listOfTodosreducer]);
 
+  useEffect(() => {
+    refadd.current?.focus();
+  }, []);
+
   return (
     <>
       <h2 style={{ textAlign: "left" }}>Todo List</h2>
-{/* Add todo :  */}
+      {/* Add todo :  */}
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -125,6 +126,7 @@ const TodoComponent = () => {
           dispatchnewName({ type: "update", payload: "" });
           dispatchnnewpriority({ type: "updatePriority", payload: "Low" });
           setn(n + 1);
+          refadd.current?.focus();
         }}
         style={{ display: "flex", gap: 8 }}
       >
@@ -152,8 +154,7 @@ const TodoComponent = () => {
         <button type="submit">Add</button>
       </form>
 
-
-{/* todo count details : */}
+      {/* todo count details : */}
 
       <div style={{ textAlign: "left" }}>
         <h3>Total no of todos :{listOfTodosreducer.length}</h3>
@@ -167,9 +168,7 @@ const TodoComponent = () => {
         </h3>
       </div>
 
-
-
-{/* Displaying todo list : */}
+      {/* Displaying todo list : */}
       {listOfTodosreducer.map((item) => (
         <div
           key={item.id}
@@ -183,7 +182,7 @@ const TodoComponent = () => {
             borderRadius: "0.5px",
           }}
         >
-    {/* checkbox: */}
+          {/* checkbox: */}
           <h1>
             <input
               type="checkbox"
@@ -194,30 +193,21 @@ const TodoComponent = () => {
               style={{ width: "40px", height: "40px" }}
             />
           </h1>
-
-
           <h2>{item.name}</h2>
           &nbsp; &nbsp; &nbsp;
-
-
           <h3>Priority:{item.priority}</h3>
-          <br />&nbsp;&nbsp;
-
-          
+          <br />
+          &nbsp;&nbsp;
           <h3>
             {item.completed ? "  Status :Completed" : "  Status : Pending"}
           </h3>
           &nbsp;&nbsp;&nbsp;&nbsp;
-
-
           <button
             onClick={() => dispatchtodos({ type: "Remove", payload: item.id })}
           >
             Remove
           </button>
           &nbsp;&nbsp;&nbsp;&nbsp;
-
-
           <input
             type="text"
             ref={refedit}
@@ -227,17 +217,14 @@ const TodoComponent = () => {
               SeteditNameDic((pre) => ({ ...pre, [item.id]: e.target.value }))
             }
           />
-
-
           <button
-            onClick={() =>
-              dispatchtodos({ type: "EditName", payload: item.id })
-            }
-            >
+            onClick={() => {
+              dispatchtodos({ type: "EditName", payload: item.id });
+              refedit.current?.focus();
+            }}
+          >
             EditName
           </button>
-
-          
         </div>
       ))}
     </>
