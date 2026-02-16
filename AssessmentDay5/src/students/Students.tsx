@@ -6,7 +6,6 @@ const Students = () => {
   return (
     <>
       <div>Welcome to List of Students</div>;
-      {/* <NavLink to="/Students">students List</NavLink> */}
       <Outlet />;
     </>
   );
