@@ -1,5 +1,5 @@
 import { useParams, useNavigate, Outlet, Link } from "react-router";
-import { stuList } from "./StudentsSection";
+import { stuList } from "./StudentsList";
 
 const StudentDetails = () => {
   const navigate = useNavigate();
@@ -26,7 +26,9 @@ const StudentDetails = () => {
       )}
       <Outlet />
       <div>
-        <Link to="/students">Back to Student List</Link>
+        <Link className="my-link" to="/students">
+          Back to Student List
+        </Link>
       </div>
     </div>
   );

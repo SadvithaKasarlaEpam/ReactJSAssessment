@@ -1,5 +1,5 @@
 import { useParams } from "react-router";
-import { stuList } from "./StudentsSection";
+import { stuList } from "./StudentsList";
 
 const Courses = () => {
   const params = useParams();

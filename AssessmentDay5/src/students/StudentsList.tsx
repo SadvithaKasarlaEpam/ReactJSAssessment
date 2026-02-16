@@ -34,29 +34,30 @@ export const stuList: studenttype[] = [
   },
 ];
 
-const StudentsSection = () => {
+const StudentsList = () => {
   const navigate = useNavigate();
   return (
     <div>
-      <h2>Students Section</h2>
+      <h2>Students List </h2>
       <ul>
         {stuList.map((student) => (
           <li key={student.id}>
             <NavLink
-              to={`/students/${student.id}`}
               style={({ isActive }) => ({
-                color: isActive ? "green" : "black",
+                textDecoration: isActive ? "none" : "underline",
               })}
+              className="studentslink"
+              to={`/students/${student.id}`}
             >
               {student.name}
             </NavLink>
           </li>
         ))}
       </ul>
-      <Outlet />
+
       <button onClick={() => navigate("/")}>Back to Home Page</button>
     </div>
   );
 };
 
-export default StudentsSection;
+export default StudentsList;

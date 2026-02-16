@@ -8,9 +8,10 @@ import Home2 from "./components/Home2";
 import About from "./components/About";
 import Login from "./components/Login";
 import PathNotFoundPage from "./components/PathNotFoundPage";
+import Students from "./students/Students";
 
 // Lazy loaded components
-const StudentsSection = lazy(() => import("./students/StudentsSection"));
+const StudentsList = lazy(() => import("./students/StudentsList"));
 const StudentDetails = lazy(() => import("./students/StudentDetails"));
 const Courses = lazy(() => import("./students/Courses"));
 
@@ -35,15 +36,24 @@ function App() {
           <Route
             path="/students"
             element={
-              isLoggedIn ? (
-                <Suspense fallback={<div>Loading Students...</div>}>
-                  <StudentsSection />
-                </Suspense>
-              ) : (
-                <Navigate to="/login" replace />
-              )
+              <Suspense fallback={<div>Loading Students...</div>}>
+                <Students />
+              </Suspense>
             }
           >
+            <Route
+              index
+              element={
+                isLoggedIn ? (
+                  <Suspense fallback={<div>Loading Students...</div>}>
+                    <StudentsList />
+                  </Suspense>
+                ) : (
+                  <Navigate to="/login" replace />
+                )
+              }
+            />
+
             <Route
               path=":id"
               element={

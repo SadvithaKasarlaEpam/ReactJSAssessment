@@ -70,3 +70,18 @@
   gap: 20px;
   justify-content: space-around;
 }
+
+.my-link {
+  color: #651637;
+  text-decoration: underline;
+}
+.my-link:hover {
+  color: #e12d3c;
+}
+
+.studentslink {
+  color: #651637;
+}
+.studentslink:hover {
+  color: #e12d3c;
+}
