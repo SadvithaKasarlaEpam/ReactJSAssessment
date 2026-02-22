@@ -8,7 +8,7 @@ const CartItem = ({ item }: { item: CartItemType }) => {
 
   return (
     <li>
-      {item.name} (${item.price}) x
+      {item.name} (Rs.{item.price}) x
       <input
         type="number"
         min={1}

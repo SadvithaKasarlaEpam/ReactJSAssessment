@@ -21,7 +21,7 @@ const Cart: React.FC = () => {
           <CartItem key={item.id} item={item} />
         ))}
       </ul>
-      <div>Total: ${total}</div>
+      <div>Total: Rs.{total}</div>
       <button
         onClick={() => dispatch(clearCart())}
         disabled={items.length === 0}
